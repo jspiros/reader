@@ -1,0 +1,8 @@
+<div class="entry" id="entry_{{ entry.id }}">
+	<h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+	<p>Published on {{ entry.published }}. Last updated on {{ entry.updated }}.</p>
+	
+	<div class="entry_content">
+		{% if entry.summary %}{{ entry.summary|safe }}{% else %}{% if entry.content %}{{ entry.content|safe }}{% endif %}{% endif %}
+	</div>
+</div>

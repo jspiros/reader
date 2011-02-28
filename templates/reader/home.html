@@ -1,0 +1,16 @@
+{% extends 'reader/base.html' %}
+
+{% block title %}{{ block.super }} - Home{% endblock %}
+
+{% block body %}
+	<h1>Feeds</h1>
+	{% for feed in feeds %}
+		{% if forloop.first %}<ul>{% endif %}
+		<li><a href="{{ feed.link }}">{{ feed.title }}</a></li>
+		{% if forloop.last %}</ul>{% endif %}
+	{% endfor %}
+	<h1>Entries</h1>
+	{% for entry in entries %}
+		{% include 'reader/includes/entry.html' %}
+	{% endfor %}
+{% endblock %}
