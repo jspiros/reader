@@ -1,0 +1,5 @@
+Prerequisites (only tested on):
+	* Django 1.2.5+ <http://www.djangoproject.com/>
+	* django-staticmedia 0.2.2+ <http://pypi.python.org/pypi/django-staticmedia/>
+	* south 0.7.3+ <http://south.aeracode.org/>
+

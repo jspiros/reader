@@ -41,3 +41,19 @@ class Subscription(models.Model):
 	@property
 	def title(self):
 		return self.custom_title if self.custom_title else self.feed.title
+	
+	def __unicode__(self):
+		return u'%s <%s>' % (self.user, self.feed)
+
+
+class UserEntry(models.Model):
+	user = models.ForeignKey(User, related_name='reader_userentries')
+	entry = models.ForeignKey(Entry, related_name='userentries')
+	read = models.BooleanField(default=False)
+	
+	class Meta:
+		verbose_name = 'user entry relationship'
+		verbose_name_plural = 'user entry relationships'
+	
+	def __unicode__(self):
+		return u'%s <%s>' % (self.user, self.entry)

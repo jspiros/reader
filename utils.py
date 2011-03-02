@@ -1,4 +1,4 @@
-from .models import Feed, Entry
+from .models import Feed, Entry, Subscription, UserEntry
 import datetime
 import feedparser
 
@@ -93,7 +93,23 @@ def refresh_all_feeds():
 		refresh_feed(feed)
 
 
-def add_feed(url):
-	feed = Feed(url=url)
+def add_feed(url, user=None):
+	try:
+		feed = Feed.objects.get(url=url)
+	except Feed.DoesNotExist:
+		feed = Feed(url=url)
 	refresh_feed(feed)
+	if user is not None:
+		sub, _ = Subscription.objects.get_or_create(user=user, feed=feed)
 	return feed
+
+
+def unread_count(user, feed=None):
+	if feed:
+		entries = feed.entries
+	else:
+		entries = Entry.objects.filter(feed__subscriptions__user=user)
+	total_entries = entries.count()
+	read_entries = entries.filter(userentries__user=user, userentries__read=True).count()
+	return total_entries - read_entries
+	

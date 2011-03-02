@@ -1,16 +1,15 @@
 {% extends 'reader/base.html' %}
+{% load staticmedia %}
 
-{% block title %}{{ block.super }} - Home{% endblock %}
-
-{% block body %}
-	<h1>Feeds</h1>
-	{% for feed in feeds %}
-		{% if forloop.first %}<ul>{% endif %}
-		<li><a href="{{ feed.link }}">{{ feed.title }}</a></li>
-		{% if forloop.last %}</ul>{% endif %}
-	{% endfor %}
-	<h1>Entries</h1>
-	{% for entry in entries %}
-		{% include 'reader/includes/entry.html' %}
-	{% endfor %}
-{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% mediaurl 'reader/extjs/resources/css/ext-all.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% mediaurl 'reader/icons.css' %}" type="text/css" />
+<script src="{% mediaurl 'reader/extjs/adapter/ext/ext-base.js' %}" type="text/javascript"></script>
+<script src="{% mediaurl 'reader/extjs/ext-all.js' %}" type="text/javascript"></script>
+<script src="{% url reader_lib %}" type="text/javascript"></script>
+<script type="text/javascript">
+	Ext.onReady(function() {
+		READER = new Reader.Application();
+	});
+</script>
+{% endblock %}\

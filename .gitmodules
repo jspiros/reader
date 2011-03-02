@@ -1,0 +1,6 @@
+[submodule "media/reader/extjs"]
+	path = media/reader/extjs
+	url = git://github.com/probonogeek/extjs.git
+[submodule "media/reader/fugue-icons"]
+	path = media/reader/fugue-icons
+	url = git://git.ithinksw.org/fugue-icons.git
